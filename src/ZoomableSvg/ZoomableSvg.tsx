@@ -153,25 +153,6 @@ const ZoomableSvg = forwardRef<ZoomableSvgRef, ZoomableSvgProps>(
         saveScaleAndPosition();
       });
 
-    //transform: `translate(${position.value.x}, ${position.value.y}) scale(${scale.value})`,
-    //const animatedProps = useAnimatedProps(() => {
-    //   if (Platform.OS === 'ios') {
-    //     // iOS (Fabric) wants a string
-    //     return {
-    //       transform: `translate(${position.value.x}, ${position.value.y}) scale(${scale.value})`,
-    //     };
-    //   } else {
-    //     // Android (Fabric) wants an array
-    //     return {
-    //       transform: [
-    //         { translateX: position.value.x },
-    //         { translateY: position.value.y },
-    //         { scale: scale.value },
-    //       ],
-    //     };
-    //   }
-    // });
-
     const animatedProps = useAnimatedProps(() => {
       return {
         transform: [
@@ -182,11 +163,7 @@ const ZoomableSvg = forwardRef<ZoomableSvgRef, ZoomableSvgProps>(
       };
     });
 
-    const tap = Gesture.Tap().onEnd(e => {
-      console.log('tap at ', e.x, e.y);
-    });
-
-    const gestures = Gesture.Exclusive(pan, pinch, tap);
+    const gestures = Gesture.Exclusive(pan, pinch);
 
     return (
       <GestureDetector gesture={gestures}>
